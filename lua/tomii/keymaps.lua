@@ -61,9 +61,9 @@ kmn("<leader>gb", "<CMD>Telescope git_branches<CR>")
 kmn("<leader>gs", "<CMD>Telescope git_status<CR>")
 
 ---------- TERMINALS ----------
-kmn("<leader>T", "<CMD>tabedit term://zsh | tabmove 0<CR>") -- starts a new terminal in a new tab
-kmn("<leader>tr", "<CMD>vsplit term://zsh<CR>") -- starts a new terminal in the right side of the screen
-kmn("<leader>tb", "<CMD>split term://zsh | resize 10<CR>") -- starts a new terminal in the bottom of the screen
+kmn("<leader>T", "<CMD>tabedit term://cmd.exe | tabmove 0<CR>") -- starts a new terminal in a new tab
+kmn("<leader>tr", "<CMD>vsplit term://cmd.exe <CR>") -- starts a new terminal in the right side of the screen
+kmn("<leader>tb", "<CMD>split term://cmd.exe | resize 10<CR>") -- starts a new terminal in the bottom of the screen
 vim.cmd "au BufEnter * if &buftype == 'terminal' | :startinsert | endif" -- start terminal in insert mode
 vim.cmd "tnoremap <A-a> <C-\\><C-n>" -- this lets you scape the terminal and switch windows and/or tabs
 kmn("<F12>", "<CMD>exec '!konsole '.shellescape('%:p')' & disown'<CR>") -- launches a new window in the current path
