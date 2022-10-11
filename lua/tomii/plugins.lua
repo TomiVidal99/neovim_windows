@@ -126,9 +126,6 @@ return packer.startup(function(use)
   use { -- omnisharp and unity
     "OmniSharp/omnisharp-vim"
   }
-  --use { -- dynamic linting for unity and omnisharp TODO: check
-  --  "dense-analysis/ale"
-  --}
 
   use { -- Commenting, easily and smartly comment with some keymaps
     'numToStr/Comment.nvim',

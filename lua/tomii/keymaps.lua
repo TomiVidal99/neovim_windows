@@ -44,10 +44,12 @@ kmn("<localleader>li", "<CMD>VimtexInfo<CR>")
 kmn("<C-b>", "<CMD>NERDTreeToggle | NERDTreeMirror<CR>")
 kmn("<A-b>", "<CMD>NERDTreeFind<CR>")
 
----------- TELESCOPE ----------
+-- LSP
 -- Format code with LSP
 kmn("<leader>F", "<CMD>lua vim.lsp.buf.format()<CR>")
+kmn("K", "<CMD>lua vim.lsp.buf.hover()<CR>")
 
+---------- TELESCOPE ----------
 -- All type of search: files, keywords, maps, etc.
 kmn("gr", "<CMD>Telescope lsp_references<CR>")
 kmn("gi", "<CMD>Telescope lsp_implementations<CR>")
