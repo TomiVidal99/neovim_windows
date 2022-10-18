@@ -68,3 +68,8 @@ lsp.sumneko_lua.setup({
   capabilities = capabilities,
   settings = require("tomii.lsp.settings.sumneko_lua"),
 })
+
+lsp.jsonls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+});

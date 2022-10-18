@@ -103,7 +103,7 @@ return packer.startup(function(use)
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
     config = function ()
-      require('telescope').setup({ defaults = { file_ignore_patterns = { "node_modules", ".git" } } })
+      require('telescope').setup({ defaults = { file_ignore_patterns = { "node_modules", ".git", "*.meta" } } })
     end
   }
   use "preservim/nerdtree" -- file explorer
