@@ -112,3 +112,16 @@ ls.add_snippets("cs", {
     t({"/// </summary>"}),
   }),
 })
+
+ls.add_snippets("cs", {
+	s({
+    trig="summ",
+    name="Summary comment with parameters descriptors",
+    dscr="Descriptive comment with description of the parameters",
+  }, {
+    t({"/// <summary>", ""}),
+    t({"/// "}), i(0), t({"", ""}),
+    t({"/// </summary>", ""}),
+    t({"/// <param name=\""}), i(1), t({"\">"}), i(2), t({"</param>"})
+  }),
+})
