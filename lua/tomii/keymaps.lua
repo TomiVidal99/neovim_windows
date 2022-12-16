@@ -35,6 +35,7 @@ vim.g.maplocalleader = ","
 -- Lspsaga 
 kmn("<leader>ca", "<CMD>Lspsaga code_action<CR>")
 kmn("<leader>pd", "<CMD>Lspsaga peek_definition<CR>")
+kmn("<leader>k", "<CMD>Lspsaga hover_doc<CR>")
 
 -- LATEX
 kmn("<localleader>lc", "<CMD>VimtexCompile<CR>")
