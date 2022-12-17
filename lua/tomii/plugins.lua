@@ -51,8 +51,8 @@ return packer.startup(function(use)
 
   -- THEME
   use {
-   "svrana/neosolarized.nvim", -- actual theme
-   requires = { "tjdevries/colorbuddy.nvim" }
+    "svrana/neosolarized.nvim", -- actual theme
+    requires = { "tjdevries/colorbuddy.nvim" }
   }
   use "lukas-reineke/indent-blankline.nvim" -- identation lines
   use {
@@ -70,10 +70,22 @@ return packer.startup(function(use)
     "williamboman/nvim-lsp-installer",
     "neovim/nvim-lspconfig",
   }
+  use { -- LSP loading status
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup {}
+    end
+  }
   use { "glepnir/lspsaga.nvim", branch = "main" } -- better UI for LSP related
   use { -- Type checking
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate"
+    run = function()
+      pcall(require("nvim-treesitter.install").update { with_sync = true })
+    end
+  }
+  use { -- Additional text objects via treesitter
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter"
   }
   use "nvim-treesitter/playground" -- adds type checking and other things to treesitter
   use "jose-elias-alvarez/null-ls.nvim" -- more lsp stuff: completion, formatting and so one, that some lsp dont come with
@@ -99,10 +111,10 @@ return packer.startup(function(use)
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- Navigation
-  use {  -- general navigation
+  use { -- general navigation
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
-    config = function ()
+    config = function()
       require('telescope').setup({ defaults = { file_ignore_patterns = { "node_modules", ".git", "*.meta" } } })
     end
   }
