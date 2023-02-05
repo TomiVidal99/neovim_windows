@@ -17,6 +17,7 @@ ts.setup({
 		disable = {},
 	},
 	ensure_installed = {
+		"markdown",
 		"vim",
 		"comment",
 		"tsx",
