@@ -34,8 +34,8 @@ vim.g.maplocalleader = ","
 ---------- NORMAL ----------
 -- Lspsaga 
 kmn("<leader>ca", "<CMD>Lspsaga code_action<CR>")
-kmn("<leader>pd", "<CMD>Lspsaga peek_definition<CR>")
 kmn("<leader>k", "<CMD>Lspsaga hover_doc<CR>")
+kmn("<leader>A", "<CMD>Lspsaga lsp_finder<CR>")
 
 -- LATEX
 kmn("<localleader>lc", "<CMD>VimtexCompile<CR>")
@@ -45,12 +45,10 @@ kmn("<localleader>li", "<CMD>VimtexInfo<CR>")
 kmn("<C-b>", "<CMD>NERDTreeToggle | NERDTreeMirror<CR>")
 kmn("<A-b>", "<CMD>NERDTreeFind<CR>")
 
--- LSP
+---------- TELESCOPE ----------
 -- Format code with LSP
 kmn("<leader>F", "<CMD>lua vim.lsp.buf.format()<CR>")
-kmn("K", "<CMD>lua vim.lsp.buf.hover()<CR>")
 
----------- TELESCOPE ----------
 -- All type of search: files, keywords, maps, etc.
 kmn("gr", "<CMD>Telescope lsp_references<CR>")
 kmn("gi", "<CMD>Telescope lsp_implementations<CR>")
@@ -65,9 +63,9 @@ kmn("<leader>gb", "<CMD>Telescope git_branches<CR>")
 kmn("<leader>gs", "<CMD>Telescope git_status<CR>")
 
 ---------- TERMINALS ----------
-kmn("<leader>T", "<CMD>tabedit term://cmd.exe | tabmove 0<CR>") -- starts a new terminal in a new tab
-kmn("<leader>tr", "<CMD>vsplit term://cmd.exe <CR>") -- starts a new terminal in the right side of the screen
-kmn("<leader>tb", "<CMD>split term://cmd.exe | resize 10<CR>") -- starts a new terminal in the bottom of the screen
+kmn("<leader>T", "<CMD>tabedit term://zsh | tabmove 0<CR>") -- starts a new terminal in a new tab
+kmn("<leader>tr", "<CMD>vsplit term://zsh<CR>") -- starts a new terminal in the right side of the screen
+kmn("<leader>tb", "<CMD>split term://zsh | resize 10<CR>") -- starts a new terminal in the bottom of the screen
 vim.cmd "au BufEnter * if &buftype == 'terminal' | :startinsert | endif" -- start terminal in insert mode
 vim.cmd "tnoremap <A-a> <C-\\><C-n>" -- this lets you scape the terminal and switch windows and/or tabs
 kmn("<F12>", "<CMD>exec '!konsole '.shellescape('%:p')' & disown'<CR>") -- launches a new window in the current path
@@ -84,7 +82,7 @@ kmn("<C-p>", vim.diagnostic.goto_prev)
 vim.cmd "command! W w !sudo tee > /dev/null %"
 
 -- Delete without yank.
-vim.cmd 'nnoremap <leader>d "_d'
+--vim.cmd 'nnoremap <leader>d "_d' -- TODO: this does not work
 vim.cmd 'nnoremap x "_x'
 
 -- Increment/decrement.
@@ -158,6 +156,13 @@ kmv("p", '"_dP')
 
 -- Quit visual mode with Alt+a.
 vim.cmd "vmap <A-a> <Esc>"
+
+-- visual multi edit
+vim.cmd [[
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>' " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>' " replace visual C-n
+]]
 
 -- Stay in indent mode.
 kmv("<", "<gv")

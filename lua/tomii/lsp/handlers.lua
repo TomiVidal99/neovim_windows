@@ -1,7 +1,7 @@
 local HANDLERS = {}
 
 -- Don't use the following LSPs for formatting
-local PREVENT_LSPS_FROM_FORMATTING = { "tsserver" }
+local PREVENT_LSPS_FROM_FORMATTING = {"tsserver"}
 
 HANDLERS.setup = function()
 
@@ -82,16 +82,17 @@ local function lsp_keymaps(bufnr)
   local buffer_opts = { noremap = true, silent = true, buffer = bufnr }
   local function keymap_buf(key, fn) vim.keymap.set("n", key, fn, buffer_opts) end
 
+  -- I implement these two with Telescope
   keymap_buf('gD', '<CMD>lua vim.lsp.buf.declaration()<CR>')
   keymap_buf('<leader>dd', '<CMD>lua vim.lsp.buf.type_definition()<CR>')
   keymap_buf('<leader>rr', '<CMD>lua vim.lsp.buf.rename()<CR>')
-  keymap_buf("<leader>ff", "<CMD>lua vim.lsp.buf.formatting()<CR>")
+  keymap_buf("<leader>ff", "<CMD>lua vim.lsp.buf.format({ async = true })<CR>")
 
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
 end
 
 HANDLERS.on_attach = function(client, bufnr)
-  for val, key in pairs(PREVENT_LSPS_FROM_FORMATTING) do
+  for _, key in pairs(PREVENT_LSPS_FROM_FORMATTING) do
     if client.name == key then
       client.server_capabilities.document_formatting = false
     end
@@ -103,13 +104,18 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
+-- Error that throws clangd
+capabilities.offsetEncoding = "utf-8"
+
 -- native LSP completion
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
+local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_nvim_lsp_ok then
+  print "ERRROR: cmp_nvim_lsp is not available. Called from handlers.lua"
   return
 end
 
 HANDLERS.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-HANDLERS.capabilities.textDocument.colorProvider = true -- this is to enable the tailwindcss plugin
+--HANDLERS.capabilities.textDocument.colorProvider = true -- this is to enable the tailwindcss plugin
+
 
 return HANDLERS
